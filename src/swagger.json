@@ -1,0 +1,159 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Rexy Events API",
+      "description": "API for managing events, including creation, retrieval, updating, and deletion of event data."
+    },
+    "host": "rexy-events.onrender.com",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Event Operations",
+        "description": "Endpoints related to event operations"
+      }
+    ],
+    "schemes": [
+      "https"
+    ],
+    "securityDefinitions": {},
+    "paths": {
+      "/event/": {
+        "get": {
+          "description": "Retrieve a list of all events. This endpoint returns basic information about each event, such as names and dates.",
+          "responses": {
+            "200": {
+              "description": "A list of events was successfully retrieved."
+            },
+            "401": {
+              "description": "Unauthorized access to the endpoint."
+            },
+            "500": {
+              "description": "Internal Server Error occurred while processing the request."
+            }
+          }
+        },
+        "post": {
+          "description": "Create a new event. This endpoint allows for the submission of event details such as name, date, location, and description.",
+          "responses": {
+            "201": {
+              "description": "New event was successfully created."
+            },
+            "401": {
+              "description": "Unauthorized access to the endpoint."
+            },
+            "500": {
+              "description": "Internal Server Error occurred while processing the request."
+            }
+          },
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Event data to be created.",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "description": {"type": "string"},
+                  "date": {"type": "string", "format": "date-time"},
+                  "location": {"type": "string"}
+                }
+              }
+            }
+          ]
+        }
+      },
+      "/event/{id}": {
+        "get": {
+          "description": "Retrieve detailed information about a specific event using its ID.",
+          "responses": {
+            "200": {
+              "description": "Event data was successfully retrieved."
+            },
+            "401": {
+              "description": "Unauthorized access to the endpoint."
+            },
+            "500": {
+              "description": "Internal Server Error occurred while processing the request."
+            }
+          },
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        },
+        "put": {
+          "description": "Update an existing event. This endpoint allows for modifying details of an event identified by its ID.",
+          "responses": {
+            "204": {
+              "description": "Event data was successfully updated."
+            },
+            "401": {
+              "description": "Unauthorized access to the endpoint."
+            },
+            "500": {
+              "description": "Internal Server Error occurred while processing the request."
+            }
+          },
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Updated event data.",
+              "required": true,
+              "schema": {
+                "type": "object"
+              }
+            }
+          ]
+        },
+        "delete": {
+          "description": "Delete a specific event using its ID. This endpoint removes the event from the system.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Event was successfully deleted."
+            },
+            "401": {
+              "description": "Unauthorized access to the endpoint."
+            },
+            "500": {
+              "description": "Internal Server Error occurred while processing the request."
+            }
+          }
+        }
+      }
+    }
+  }
+  
