@@ -1,10 +1,12 @@
 import { client } from '../db/connect.js';
 import { ObjectId } from 'mongodb';
+import { IEvents } from '../lib/exercises.js';
 
 const createNew = async (req, res) => {
     await client.connect()
+    const eventData: IEvents = req.body;
 
-    const event = { ...req.body, _id: new ObjectId() };
+    const event = { ...eventData, _id: new ObjectId() };
     const result = await client.db('rexy_events').collection('events').insertOne(event);
     if (result.acknowledged) {
         res.status(201).json(event);
@@ -15,9 +17,10 @@ const createNew = async (req, res) => {
 
 const updateSingle = async (req, res) => {
     await client.connect()
-    const eventId = new ObjectId(req.query.id);     
+    const eventId = new ObjectId(req.params.id);     
+    const eventData: IEvents = req.body;
 
-    const result = await client.db('rexy_events').collection('events').replaceOne({_id: eventId}, req.body)
+    const result = await client.db('rexy_events').collection('events').replaceOne({_id: eventId}, eventData)
 
     if (result.acknowledged) {
         res.status(204).send();
@@ -28,11 +31,11 @@ const updateSingle = async (req, res) => {
 
 const deleteSingle = async (req, res) => {
     await client.connect()
-    const eventId = new ObjectId(req.query.id);
+    const eventId = new ObjectId(req.params.id);
     
     const result = await client.db('rexy_events').collection('events').deleteOne({_id: eventId});
     if (result.deletedCount > 0) {
-        res.status(200).send();
+        res.status(200).json({acknowledged: result.acknowledged, deletedCount: result.deletedCount});
       } else {
         res.status(500).json({message: 'Some error occurred while deleting the event.'});
       }
