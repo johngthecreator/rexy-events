@@ -1,6 +1,6 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
 import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from './swagger.json';
+import swaggerDocument from '../swagger.json';
 
 const app: Express = express();
 app.use(express.json());
