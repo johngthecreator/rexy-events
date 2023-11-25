@@ -1,5 +1,5 @@
 import express, { Express } from 'express';
-import { createNew, updateSingle, deleteSingle } from '../controllers/eventController.js';
+import { createNew, updateSingle, deleteSingle } from '../controllers/eventController';
 const app: Express = express();
 
 export const events = express.Router();
