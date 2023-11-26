@@ -18,7 +18,7 @@
     ],
     "securityDefinitions": {},
     "paths": {
-      "/event/": {
+      "/events/": {
         "get": {
           "description": "Retrieve a list of all events. This endpoint returns basic information about each event, such as names and dates.",
           "responses": {
@@ -72,7 +72,7 @@
           ]
         }
       },
-      "/event/{id}": {
+      "/events/{id}": {
         "get": {
           "description": "Retrieve detailed information about a specific event using its ID.",
           "responses": {
