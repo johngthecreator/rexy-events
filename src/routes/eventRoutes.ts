@@ -1,9 +1,13 @@
-import express, { Express } from 'express';
-import { createNew, updateSingle, deleteSingle } from '../controllers/eventController';
-const app: Express = express();
+import express, { Router } from 'express';
+import { createNew, updateSingle, deleteSingle, getSingle, getAll } from '../controllers/eventController';
 
-export const events = express.Router();
-events.post("/", createNew);
-events.put("/:id", updateSingle);
-events.delete("/:id", deleteSingle);
+const router: Router = express.Router();
 
+router.post("/", createNew);
+router.put("/:id", updateSingle);
+router.delete("/:id", deleteSingle);
+
+router.get("/:id", getSingle);
+router.get("/", getAll);
+
+export { router as events };
