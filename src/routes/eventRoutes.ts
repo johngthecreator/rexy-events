@@ -1,13 +1,14 @@
 import express, { Router } from 'express';
 import { createNew, updateSingle, deleteSingle, getSingle, getAll } from '../controllers/eventController';
+import { ensureAuth } from '../services/auth';
 
 const router: Router = express.Router();
 
-router.post("/", createNew);
-router.put("/:id", updateSingle);
-router.delete("/:id", deleteSingle);
+router.post("/", ensureAuth, createNew);
+router.put("/:id", ensureAuth, updateSingle);
+router.delete("/:id", ensureAuth, deleteSingle);
 
-router.get("/:id", getSingle);
-router.get("/", getAll);
+router.get("/:id", ensureAuth, getSingle);
+router.get("/", ensureAuth, getAll);
 
 export { router as events };
