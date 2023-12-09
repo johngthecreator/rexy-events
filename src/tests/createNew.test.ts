@@ -13,7 +13,7 @@ jest.mock('passport', () => ({
 
 // Set up the Express app for testing
 const app: Express = express();
-dotenv.config()
+dotenv.config();
 app.use(express.json()); // Assuming you're using JSON payloads
 
 // Use your events routes in the app
