@@ -1,6 +1,6 @@
 import { client } from '../db/connect';
 import { ObjectId } from 'mongodb';
-import { IEvents } from '../lib/exercises';
+import { IEvents } from '../lib/event';
 
 const createNew = async (req, res) => {
     await client.connect();
