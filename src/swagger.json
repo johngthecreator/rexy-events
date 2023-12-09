@@ -5,7 +5,7 @@
         "title": "Rexy Events API",
         "description": "API for managing events, including creation, retrieval, updating, and deletion of event data."
     },
-    "host": "localhost:8080",
+    "host": "rexy-events.onrender.com",
     "basePath": "/",
     "tags": [
         {
@@ -14,7 +14,7 @@
         }
     ],
     "schemes": [
-        "http"
+        "https"
     ],
     "securityDefinitions": {},
     "paths": {
